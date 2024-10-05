@@ -1,9 +1,9 @@
 import { createMemoryHistory, createRouter } from 'vue-router'
 
-import HomeView from './views/HelloWorld.vue'
+import DashboardPage from './views/DashboardPage.vue'
 
 const routes = [
-  { path: '/', component: HomeView },
+  { path: '/', component: DashboardPage },
 ]
 
 const router = createRouter({
@@ -11,4 +11,4 @@ const router = createRouter({
   routes,
 })
 
-export default router
+export default router 
