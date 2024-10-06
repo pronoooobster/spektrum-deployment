@@ -43,8 +43,7 @@
                     </v-card-subtitle>
                 </v-card>
                 <!-- loading skeleton for the events card -->
-                <v-skeleton-loader v-if="nearbyEventsLoading" class="mx-auto loading-skeleton"
-                max-width="80%" type="card"></v-skeleton-loader>
+                <v-skeleton-loader v-if="nearbyEventsLoading" class="mx-auto loading-skeleton" type="card"></v-skeleton-loader>
                 <!-- card displaying the nearby events or saying that there is none-->
                 <Transition>
                 <v-card
