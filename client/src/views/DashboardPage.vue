@@ -95,115 +95,6 @@
             </Transition>
             </v-col>
         </v-row>
-        <!-- for the screen wider 1024px, render all cards in one row -->
-        <v-row style="margin: 0;" align="center" justify="center" class="phone-hide">
-            <v-col style="margin: 0;">
-                <!-- <h1 style="color: #356859; margin: auto; margin-top: 20px" class="dm-serif-display-regular text-center">cropify desktop</h1> -->
-                <!-- <v-divider style="color: #356859"></v-divider> -->
-                <v-chip style="margin: 40px; margin-top: 10px; margin-bottom: 30px" color="green" outlined>📍 {{this.city}}, {{ this.county }}</v-chip>
-                <v-card
-                    outlined
-                    elevation="2"
-                    max-width=""
-                    class="temperature-card"
-                >
-                    <v-card-title>
-                        <h2 style="font-size: 1.5em; color: #3b763d; text-align: left">{{ this.city }}</h2>
-                    </v-card-title>
-                    <v-img :src="weather.weatherIconUrl" width="40%" class="img"></v-img>
-                    <v-card-title>
-                        <h2 style="font-size: 2em; color: #3b763d; text-align:left">{{ weather.temperature }}°C</h2>
-                    </v-card-title>
-                    <v-card-subtitle>
-                        <h3 style="font-size: 1.5em; color: #3b763d; text-align:left">{{ this.weather.weatherDescription }}</h3>
-                        <h3 style="font-size: 1.25em; color: #3b763d; text-align: left">Max: {{ this.weather.temperatureMax }}°C, Min: {{ this.weather.temperatureMin }}°C</h3>
-                    </v-card-subtitle>
-                </v-card>
-            </v-col>
-            <v-col>
-                <v-card
-                    outlined
-                    elevation="2"
-                    max-width=""
-                    class="humidity-card"
-                >
-                    <v-row style="height: fit-content;" align="center">
-                        <v-col>
-                            <v-card-title>
-                                <h2 style="font-size: 1.5em; color: #135eab; text-align:left">Humidity: {{ weather.humidity }}%</h2>
-                            </v-card-title>
-                        </v-col>
-                    </v-row>
-                    <v-card-subtitle>
-                        <h3 style="font-size: 1.25em; color: #135eab; text-align:left">Wind Speed: {{ this.weather.windSpeed }} m/s</h3> 
-                        <h3 style="font-size: 1.25em; color: #135eab; text-align:left">Wind Direction: {{ this.weather.windDirection }}°</h3>
-                    </v-card-subtitle>
-                </v-card>
-            </v-col>
-            <v-col>
-                <v-card
-                    v-if="!nearbyEventsLoading"
-                    outlined
-                    elevation="2"
-                    max-width=""
-                    class="event-card"
-                >
-                    <v-card-title>
-                        <h2 style="font-size: 1.5em; color: #827c5b; text-align:left">Nearby Events</h2>
-                    </v-card-title>
-                    <v-card-subtitle>
-                        <h3 style="font-size: 1.25em; color: #827c5b; text-align:left">Within 700km radius</h3>
-                    </v-card-subtitle>
-                        <v-row>
-                            <v-col>
-                                <v-list  style="background-color: #fffbe6" v-if="nearbyEvents.length > 0">
-                                    <v-list-item v-for="event in nearbyEvents" :key="event.id">
-                                        <v-list-item-content>
-                                            <v-alert
-                                                style="background-color: rgba(255, 0, 0, 0.5);"
-                                                shaped
-                                                text
-                                                type="warning"
-                                            >
-                                            <v-list-item-title style="text-align:left">{{ event.title }}</v-list-item-title>
-                                            <v-list-item-subtitle style="text-align:left">{{ event.categories[0].title }}</v-list-item-subtitle>
-                                            </v-alert>
-                                        </v-list-item-content>
-                                    </v-list-item>
-                                </v-list>
-                                <v-alert v-if="nearbyEvents.length <= 0"
-                                    color="green"
-                                    shaped
-                                    text
-                                    type="success"
-                                    style="margin-top: 20px;
-                                    margin-bottom: 10px;
-                                    margin-left: 10px;
-                                    margin-right: 10px;"
-                                >
-                                    No events nearby within the last 60 days.
-                                </v-alert>
-                            </v-col>
-                        </v-row>
-                </v-card>
-            </v-col>
-            <!-- small text on the bottom of the page-->
-            <v-col>
-                <v-footer
-                    color="green"
-                    app
-                    dark
-                >
-                    <v-col>
-                        <v-row>
-                            <v-col>
-                                <v-footer-title>Cropify is more suitable for mobile devices!</v-footer-title>
-                            </v-col>
-                        </v-row>
-                    </v-col>
-                </v-footer>
-            </v-col>
-        </v-row>
     </v-app>
 </template>
 
@@ -331,7 +222,7 @@ export default {
     mounted() {
         this.nearbyEventsLoading = true;
         this.getLocationAndWeather().then(() => {
-            this.getNearbyEvents(2000); // RADIUS HERE
+            this.getNearbyEvents(700); // RADIUS HERE
         });
     },
     components: {
@@ -354,20 +245,8 @@ export default {
     transition: 0.3s;
 
     /* styling for the big screen */
-    /* @media (min-width: 1024px) {
-        width: 30%;
-    } */
-}
-
-.phone-hide {
-    @media (max-width: 1024px) {
-        display: none;
-    }
-}
-
-.computer-hide {
     @media (min-width: 1024px) {
-        display: none;
+        width: 30%;
     }
 }
 
@@ -379,6 +258,10 @@ export default {
     border-radius: 10px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     transition: 2s;
+
+    @media (min-width: 1024px) {
+        width: 30%;
+    }
 }
 
 .humidity-card {
@@ -391,6 +274,10 @@ export default {
     border-radius: 10px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     transition: 0.3s;
+
+    @media (min-width: 1024px) {
+        width: 30%;
+    }
 }
 
 .event-card {
@@ -405,6 +292,10 @@ export default {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     transition: 2s;
     animation: fadeIn 2s;
+
+    @media (min-width: 1024px) {
+        width: 30%;
+    }
 }
 .img {
     display: block;
