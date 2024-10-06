@@ -2,13 +2,8 @@
     <v-app>
         <v-row>
             <v-col>
-                <h1 class="text-center">Cropify</h1>
-                <v-chip color="purple" outlined>📍 {{this.city}}, {{ this.county }}</v-chip>
-                <!-- add tabs -->
-                <v-tabs>
-                    <v-tab>Weather</v-tab>
-                    <v-tab>Humidity</v-tab>
-                </v-tabs>
+                <h1 style="color: #356859; margin-top: 20px" class="dm-serif-display-regular text-center">cropify</h1>
+                <v-chip style="margin-left: 40px; margin-top: 30px; margin-bottom: 30px" color="green" outlined>📍 {{this.city}}, {{ this.county }}</v-chip>
                 <!-- a card for the current weather -->
                 <v-card
                     outlined
@@ -16,33 +11,35 @@
                     max-width=""
                     class="temperature-card"
                 >
-                    <v-img :src="weather.weatherIconUrl" width="50%" class="img"></v-img>
                     <v-card-title>
-                        <h2>{{ weather.temperature }}°C</h2>
+                        <h2 style="font-size: 1.5em; color: #3b763d; text-align: left">{{ this.city }}</h2>
+                    </v-card-title>
+                    <v-img :src="weather.weatherIconUrl" width="40%" class="img"></v-img>
+                    <v-card-title>
+                        <h2 style="font-size: 2em; color: #3b763d; text-align:left">{{ weather.temperature }}°C</h2>
                     </v-card-title>
                     <v-card-subtitle>
-                        <h3>{{ this.weather.weatherDescription }}</h3>
-                        <h3>Max: {{ this.weather.temperatureMax }}ºC</h3> <h3>Min: {{ this.weather.temperatureMin }}ºC</h3>
+                        <h3 style="font-size: 1.5em; color: #3b763d; text-align:left">{{ this.weather.weatherDescription }}</h3>
+                        <h3 style="font-size: 1.5em; color: #2d5e3a; text-align: left">Max: {{ this.weather.temperatureMax }}°C, Min: {{ this.weather.temperatureMin }}°C</h3>
                     </v-card-subtitle>
                 </v-card>
-
                 <v-card
-                outlined
-                elevation="2"
-                max-width=""
-                class="humidity-card"
-            >
-                <v-row style="height: fit-content;" align="center">
-                    <v-col>
-                        <v-card-title>
-                            <h2>Humidity: {{ weather.humidity }}%</h2>
-                        </v-card-title>
-                    </v-col>
-                </v-row>
-                <v-card-subtitle>
-                    <h3>Wind Speed: {{ this.weather.windSpeed }}</h3> 
-                    <h3>Wind Direction: {{ this.weather.windDirection }}°</h3>
-                </v-card-subtitle>
+                    outlined
+                    elevation="2"
+                    max-width=""
+                    class="humidity-card"
+                >
+                    <v-row style="height: fit-content;" align="center">
+                        <v-col>
+                            <v-card-title>
+                                <h2 style="font-size: 1.5em; color: #3b82ca;">Humidity: {{ weather.humidity }}%</h2>
+                            </v-card-title>
+                        </v-col>
+                    </v-row>
+                    <v-card-subtitle>
+                        <h3 style="font-size: 1.5em; color: #3b82ca; ">Wind Speed: {{ this.weather.windSpeed }}</h3> 
+                        <h3 style="font-size: 1.5em; color: #3b82ca;">Wind Direction: {{ this.weather.windDirection }}°</h3>
+                    </v-card-subtitle>
                 </v-card>
             </v-col>
         </v-row>
@@ -61,6 +58,7 @@
 
 <script>
 import axios from 'axios';
+
 
 export default {
     name: 'DashboardPage',
@@ -136,6 +134,8 @@ export default {
 
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap');
+
 body {
     background-color: #FFFBE6;
 }
@@ -151,7 +151,8 @@ body {
 }
 
 .humidity-card {
-    margin: 0 auto;
+    margin: auto;
+    margin-top: 40px;
     padding: 10px;
     width: 80%;
     text-align: center;
@@ -162,14 +163,14 @@ body {
 }
 .img {
     display: block;
-    margin-left: auto;
     margin-right: auto;
 }
 
-h2 {
-    font-size: 2em;
-    color: #ffffff;
-    font-weight: bold;
-}
+.dm-serif-display-regular {
+    font-family: "DM Serif Display", serif;
+    font-size: 3em;
+    font-weight: 400;
+    font-style: normal;
+  }
 
 </style>
