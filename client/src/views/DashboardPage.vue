@@ -109,6 +109,8 @@
 
 <script>
 import axios from 'axios';
+// vercel analytics
+import { inject } from '@vercel/analytics';
 
 
 export default {
@@ -219,6 +221,9 @@ export default {
         }, // end of deg2rad
     },
     mounted() {
+        // call the analytics injection
+        inject();
+        
         this.nearbyEventsLoading = true;
         this.getLocationAndWeather().then(() => {
             this.getNearbyEvents(700); // RADIUS HERE
