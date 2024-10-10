@@ -111,6 +111,8 @@
 import axios from 'axios';
 // vercel analytics
 import { inject } from '@vercel/analytics';
+// vercel speed insights
+import { injectSpeedInsights } from '@vercel/speed-insights';
 
 
 export default {
@@ -223,6 +225,8 @@ export default {
     mounted() {
         // call the analytics injection
         inject();
+        // call the speed insights injection
+        injectSpeedInsights();
         
         this.nearbyEventsLoading = true;
         this.getLocationAndWeather().then(() => {
